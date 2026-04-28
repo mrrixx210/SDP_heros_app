@@ -1,0 +1,38 @@
+# Secrets
+.env
+.env.*
+!.env.template
+!.env.example
+*.pem
+*.key
+token.json
+*.token.json
+client_secret*.json
+
+# Logs
+*.log
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build artifacts
+dist/
+build/
+.next/
+*.xcuserstate
+DerivedData/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Generated reports
+reports/daily/*.json
+
+# Tunneling / runtime
+.cloudflared/
+.pm2/
