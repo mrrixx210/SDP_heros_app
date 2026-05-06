@@ -1,0 +1,18 @@
+// SDP Heroes ... iOS Debug build settings.
+// Copy this file to Debug.xcconfig (which is .gitignored) and fill
+// in the real values from the new SDP Heroes Supabase project.
+//
+// In Xcode -> Project -> Info -> Configurations, set the Debug
+// configuration to use this xcconfig file.
+//
+// Build settings flow into Info.plist via $() variable substitution
+// at build time, then AppConfig.swift reads them via
+// Bundle.main.infoDictionary.
+
+// IMPORTANT: rotate the Supabase anon key. The legacy key from the
+// old codebase is treated as compromised; do not paste it here.
+
+SUPABASE_URL = https:/$()/your-project.supabase.co
+SUPABASE_ANON_KEY = your-rotated-debug-anon-key-here
+
+API_BASE_URL = http:/$()/localhost:3000

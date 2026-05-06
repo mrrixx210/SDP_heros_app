@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SDP Heroes API ... Cloudflare Tunnel launchd plist.
+
+  IMPORTANT: this is a SEPARATE plist from Tony's at
+  ~/Library/LaunchAgents/com.sdp.tony.tunnel.plist. NEVER touch
+  Tony's plist; modifying it kills production Tony.
+
+  Install:
+    cp infra/cloudflared/com.sdp.heroes.api.tunnel.plist \
+       ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.sdp.heroes.api.tunnel.plist
+
+  Tunnel ID gets baked in via .env CLOUDFLARE_TUNNEL_ID_API. Update
+  the WorkingDirectory + ProgramArguments TUNNEL_ID below before
+  loading.
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sdp.heroes.api.tunnel</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/cloudflared</string>
+        <string>tunnel</string>
+        <string>--config</string>
+        <string>/Users/tonyrusso/Desktop/sdp-heroes/infra/cloudflared/sdp-heroes-api.yml</string>
+        <string>run</string>
+        <string>REPLACE_WITH_TUNNEL_ID</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/sdp-heroes-api-tunnel.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/sdp-heroes-api-tunnel.err.log</string>
+</dict>
+</plist>

@@ -1,0 +1,25 @@
+{
+  "name": "sdp-heroes",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SDP Heroes v2 ... field-service backend, admin panel, iOS app, agent API surface for Super Duper Pros.",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "dev:api": "pnpm --filter @sdp/api dev",
+    "dev:admin": "pnpm --filter @sdp/admin dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @sdp/api test:e2e && pnpm --filter @sdp/admin test:e2e",
+    "test:migrations": "pnpm --filter @sdp/api test:migrations",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@9.12.0"
+}
