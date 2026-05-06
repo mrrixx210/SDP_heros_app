@@ -51,8 +51,11 @@ export type InvoiceStatus = z.infer<typeof InvoiceStatus>;
 export const PaymentMethod = z.enum(["stripe", "cash", "check", "ach", "mercury", "zelle", "other"]);
 export type PaymentMethod = z.infer<typeof PaymentMethod>;
 
+// Type names match the DB CHECK constraint in 0001_initial_schema.sql.
+// 'summary' and 'daily_log' renamed to avoid CompanyCam-pattern echoes
+// per build spec section 4 step 3.
 export const AiPageType = z.enum([
-  "walkthrough", "summary", "daily_log", "adjuster_packet", "photo_to_estimate", "anomaly",
+  "walkthrough", "job_summary", "day_wrap", "adjuster_packet", "photo_to_estimate", "anomaly",
 ]);
 export type AiPageType = z.infer<typeof AiPageType>;
 

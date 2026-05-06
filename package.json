@@ -15,10 +15,23 @@
     "test": "pnpm -r test",
     "test:e2e": "pnpm --filter @sdp/api test:e2e && pnpm --filter @sdp/admin test:e2e",
     "test:migrations": "pnpm --filter @sdp/api test:migrations",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm -r lint",
+    "test:playwright": "playwright test --config=tests/playwright/config/playwright.config.ts",
+    "test:smoke": "pnpm test:playwright --grep @smoke",
+    "test:smoke-prod": "pnpm test:playwright --project=smoke-prod",
+    "test:critical-path": "pnpm test:playwright tests/playwright/critical-path",
+    "test:regression": "pnpm test:playwright tests/playwright/regression",
+    "test:ai-quality": "pnpm test:playwright tests/playwright/ai-quality",
+    "test:integrations": "pnpm test:playwright --grep @integration",
+    "test:failover": "pnpm test:playwright tests/playwright/failover",
+    "test:pre-cutover": "pnpm test:playwright tests/playwright/pre-cutover",
+    "digest:rick": "tsx scripts/digest-rick.ts",
+    "tony:promote-railway": "tsx scripts/promote-railway.ts"
   },
   "devDependencies": {
+    "@playwright/test": "^1.46.0",
     "@types/node": "^20.14.0",
+    "tsx": "^4.16.5",
     "typescript": "^5.8.0"
   },
   "packageManager": "pnpm@9.12.0"

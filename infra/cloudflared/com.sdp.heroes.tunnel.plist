@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  SDP Heroes ... Cloudflare Tunnel launchd plist.
+
+  ONE tunnel handles BOTH api.superduperpros.com and
+  admin.superduperpros.com via two ingress rules in
+  sdp-heroes.yml. Per build spec section 5.
+
+  IMPORTANT: this is a SEPARATE plist from Tony's at
+  ~/Library/LaunchAgents/com.sdp.tony.tunnel.plist. NEVER touch
+  Tony's plist; modifying it kills production Tony.
+
+  Install:
+    cp infra/cloudflared/com.sdp.heroes.tunnel.plist \
+       ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.sdp.heroes.tunnel.plist
+
+  First-time tunnel creation:
+    cloudflared tunnel create sdp-heroes
+    cloudflared tunnel route dns sdp-heroes api.superduperpros.com
+    cloudflared tunnel route dns sdp-heroes admin.superduperpros.com
+    # Then update the TUNNEL_ID below from ~/.cloudflared/<id>.json
+-->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sdp.heroes.tunnel</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/cloudflared</string>
+        <string>tunnel</string>
+        <string>--config</string>
+        <string>/Users/tonyrusso/Desktop/sdp-heroes/infra/cloudflared/sdp-heroes.yml</string>
+        <string>run</string>
+        <string>REPLACE_WITH_TUNNEL_ID</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/sdp-heroes-tunnel.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/sdp-heroes-tunnel.err.log</string>
+</dict>
+</plist>

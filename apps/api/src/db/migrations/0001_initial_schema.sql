@@ -207,7 +207,9 @@ CREATE TABLE IF NOT EXISTS job_checklists (
 CREATE TABLE IF NOT EXISTS ai_pages (
     id                  uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     job_id              uuid REFERENCES jobs(id) ON DELETE CASCADE,
-    type                text NOT NULL CHECK (type IN ('walkthrough','summary','daily_log','adjuster_packet','photo_to_estimate','anomaly')),
+    -- Type names avoid CompanyCam-pattern echoes (build spec section 4
+    -- step 3): 'summary' -> 'job_summary', 'daily_log' -> 'day_wrap'.
+    type                text NOT NULL CHECK (type IN ('walkthrough','job_summary','day_wrap','adjuster_packet','photo_to_estimate','anomaly')),
     content             jsonb NOT NULL DEFAULT '{}'::jsonb,
     generated_by        text NOT NULL,
     source_photo_ids    text[],
