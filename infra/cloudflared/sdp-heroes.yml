@@ -1,0 +1,20 @@
+# Cloudflare tunnel config for SDP Heroes.
+# ONE tunnel ('sdp-heroes'), TWO ingress rules per build spec section 5.
+#
+# api.superduperpros.com   -> Fastify API on localhost:3000
+# admin.superduperpros.com -> Next.js admin panel on localhost:3001
+#
+# Tunnel ID + credentials path get populated after running:
+#   cloudflared tunnel create sdp-heroes
+#   cloudflared tunnel route dns sdp-heroes api.superduperpros.com
+#   cloudflared tunnel route dns sdp-heroes admin.superduperpros.com
+
+tunnel: REPLACE_WITH_TUNNEL_ID
+credentials-file: /Users/tonyrusso/.cloudflared/REPLACE_WITH_TUNNEL_ID.json
+
+ingress:
+  - hostname: api.superduperpros.com
+    service: http://localhost:3000
+  - hostname: admin.superduperpros.com
+    service: http://localhost:3001
+  - service: http_status:404

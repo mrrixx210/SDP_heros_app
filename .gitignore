@@ -36,3 +36,13 @@ reports/daily/*.json
 # Tunneling / runtime
 .cloudflared/
 .pm2/
+
+# iOS xcconfig values (templates committed; actual values local-only)
+apps/ios/Config/Debug.xcconfig
+apps/ios/Config/Release.xcconfig
+*.xcconfig
+!*.xcconfig.template
+
+# Workiz reference screenshots (NOT redistributed; local Playwright capture only)
+specs/workiz-reference/
+
